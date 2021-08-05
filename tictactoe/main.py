@@ -57,6 +57,36 @@ class Tictactoe(object):
 
 
     @property
+    def is_complete(self):
+        # if all cells are full
+        if all([i in ['X', 'O'] for i in self.cells[1::]]):
+            return True
+        if self.winner is not None:
+            return True
+        return False
+
+
+    @property
+    def winner(self):
+        matches = [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9],
+            [1, 4, 7],
+            [2, 5, 8],
+            [3, 6, 9],
+            [1, 5, 9],
+            [3, 5, 7],
+        ]
+        for match in matches:
+            if all([self.cells[i] == 'O' for i in match]):
+                return 'O'
+            if all([self.cells[i] == 'X' for i in match]):
+                return 'X'
+        return None
+
+
+    @property
     def view(self):
         view = '\n'.join([
             f' {self.cells[7]} | {self.cells[8]} | {self.cells[9]} ',
@@ -71,7 +101,8 @@ class Tictactoe(object):
     def mark(self, cell:int):
         if cell not in range(1, 10):
             raise ValueError(f'expected integer 1-9, got {cell}')
-        self.cells[cell] = next(self.turn)
+        if not self.is_complete:
+            self.cells[cell] = next(self.turn)
 
 
 if __name__ == '__main__':
