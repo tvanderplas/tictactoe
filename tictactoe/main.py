@@ -6,7 +6,11 @@ def main():
 class Game():
 
     def __init__(self):
-        self.menu()
+        mode = self.menu()
+        if mode == 1:
+            self.human()
+        if mode == 2:
+            self.comp_easy()
 
 
     def menu(self):
@@ -18,6 +22,29 @@ class Game():
             print('Please select 1 or 2')
             mode = input(prompt)
         return int(mode)
+
+
+    def human(self):
+        self.not_implemented()
+
+
+    def comp_easy(self):
+        self.not_implemented()
+
+
+    def not_implemented(self):
+        print("This mode isn't available yet!")
+        print('\ty) Return to menu')
+        print('\tn) Exit')
+        prompt = 'Try a different one?'
+        mode = input(prompt)
+        while mode not in ['y', 'n']:
+            print('Please select y or n')
+            mode = input(prompt)
+        if mode == 'y':
+            self.__init__()
+        else:
+            raise SystemExit
 
 
 if __name__ == '__main__':
