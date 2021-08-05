@@ -1,10 +1,6 @@
 
 from itertools import cycle
 
-def main():
-    Game()
-
-
 class Game():
 
     def __init__(self):
@@ -142,4 +138,4 @@ class Tictactoe(object):
 
 
 if __name__ == '__main__':
-    main()
+    Game()
