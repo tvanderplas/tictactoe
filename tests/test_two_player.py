@@ -42,5 +42,21 @@ class TwoPlayerTest(unittest.TestCase):
         self.assertEqual(setup.view, expected)
 
 
+    def test_o_on_alternate_moves(self):
+        setup = tictactoe.Tictactoe()
+        setup.mark(9)
+        setup.mark(7)
+        setup.mark(6)
+        setup.mark(4)
+        expected = '\n'.join([
+            ' O |   | X ',
+            '---+---+---',
+            ' O |   | X ',
+            '---+---+---',
+            '   |   |   ',
+        ])
+        self.assertEqual(setup.view, expected)
+
+
 if __name__ == '__main__':
     unittest.main()
