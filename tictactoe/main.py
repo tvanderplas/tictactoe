@@ -17,8 +17,8 @@ class Game():
 
     def menu(self):
         prompt = 'Select mode:'
-        print('1) Human vs. Human')
-        print('2) Human vs. Computer')
+        print('\t1) Human vs. Human')
+        print('\t2) Human vs. Computer')
         mode = input(prompt)
         while mode not in ['1', '2']:
             print('Please select 1 or 2')
@@ -27,7 +27,23 @@ class Game():
 
 
     def human(self):
-        self.not_implemented()
+        game = Tictactoe()
+        while not game.is_complete:
+            move = input(f"{game.turn}'s move:")
+            while move not in [str(i) for i in range(1, 10)]:
+                print('Please enter a valid move')
+                move = input(f"{game.turn}'s move:")
+            game.mark(int(move))
+            print(game.view)
+        print(f'{game.winner} wins!' if game.winner is not None else 'Draw!')
+        again = input('Play again? (y/n):')
+        while again not in ['y', 'n']:
+            print('Please select y or n')
+            again = input('Play again? (y/n):')
+        if again == 'y':
+            self.human()
+        else:
+            raise SystemExit
 
 
     def comp_easy(self):
@@ -53,7 +69,14 @@ class Tictactoe(object):
 
     def __init__(self):
         self.cells = [' '] * 10
-        self.turn = cycle(['X', 'O'])
+        self._turn = cycle(['X', 'O'])
+
+
+    @property
+    def turn(self):
+        turn = next(self._turn)
+        next(self._turn)
+        return turn
 
 
     @property
@@ -102,7 +125,7 @@ class Tictactoe(object):
         if cell not in range(1, 10):
             raise ValueError(f'expected integer 1-9, got {cell}')
         if not self.is_complete and self.cells[cell] not in ['X', 'O']:
-            self.cells[cell] = next(self.turn)
+            self.cells[cell] = next(self._turn)
 
 
 if __name__ == '__main__':
