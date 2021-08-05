@@ -1,4 +1,6 @@
 
+from itertools import cycle
+
 def main():
     Game()
 
@@ -51,6 +53,7 @@ class Tictactoe(object):
 
     def __init__(self):
         self.cells = [' '] * 9
+        self.turn = cycle(['X', 'O'])
 
 
     @property
@@ -63,6 +66,10 @@ class Tictactoe(object):
             f' {self.cells[0]} | {self.cells[1]} | {self.cells[2]} ',
         ])
         return view
+
+
+    def mark(self, cell):
+        self.cells[cell - 1] = next(self.turn)
 
 
 if __name__ == '__main__':
