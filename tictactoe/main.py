@@ -101,7 +101,7 @@ class Tictactoe(object):
     def mark(self, cell:int):
         if cell not in range(1, 10):
             raise ValueError(f'expected integer 1-9, got {cell}')
-        if not self.is_complete:
+        if not self.is_complete and self.cells[cell] not in ['X', 'O']:
             self.cells[cell] = next(self.turn)
 
 
