@@ -13,7 +13,7 @@ class TwoPlayerTest(unittest.TestCase):
             '---+---+---',
             '   |   |   ',
         ])
-        self.assertEqual(self.tictactoe.Tictactoe(), empty_board)
+        self.assertEqual(tictactoe.Tictactoe().view, empty_board)
 
 
 if __name__ == '__main__':

@@ -47,10 +47,22 @@ class Game():
             raise SystemExit
 
 
-class Tictactoe():
+class Tictactoe(object):
 
     def __init__(self):
-        pass
+        self.cells = [' '] * 9
+
+
+    @property
+    def view(self):
+        view = '\n'.join([
+            f' {self.cells[6]} | {self.cells[7]} | {self.cells[8]} ',
+            '---+---+---',
+            f' {self.cells[3]} | {self.cells[4]} | {self.cells[5]} ',
+            '---+---+---',
+            f' {self.cells[0]} | {self.cells[1]} | {self.cells[2]} ',
+        ])
+        return view
 
 
 if __name__ == '__main__':
