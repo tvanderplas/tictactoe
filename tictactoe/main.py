@@ -8,12 +8,22 @@ def main():
 class Game():
 
     def __init__(self):
-        mode = self.menu()
-        if mode == 1:
-            self.human()
-        if mode == 2:
-            self.comp_easy()
-
+        input('\n'.join([
+            r'___________.__         ___________               ___________            ',
+            r'\__    ___/|__| ____   \__    ___/____    ____   \__    ___/___   ____  ',
+            r'  |    |   |  |/ ___\    |    |  \__  \ _/ ___\    |    | /  _ \_/ __ \ ',
+            r'  |    |   |  \  \___    |    |   / __ \\  \___    |    |(  <_> )  ___/ ',
+            r'  |____|   |__|\___  >   |____|  (____  /\___  >   |____| \____/ \___  >',
+            r'                   \/                 \/     \/                      \/ ',
+            '\t\tTo play, use keypad or numbers to select move.',
+            '\t\t\t\t 7 | 8 | 9 ',
+            '\t\t\t\t---+---+---',
+            '\t\t\t\t 4 | 5 | 6 ',
+            '\t\t\t\t---+---+---',
+            '\t\t\t\t 1 | 2 | 3 ',
+            '',
+        ]))
+        self.menu()
 
     def menu(self):
         prompt = 'Select mode:'
@@ -23,7 +33,10 @@ class Game():
         while mode not in ['1', '2']:
             print('Please select 1 or 2')
             mode = input(prompt)
-        return int(mode)
+        if mode == '1':
+            self.human()
+        if mode == '2':
+            self.comp_easy()
 
 
     def human(self):
@@ -60,7 +73,7 @@ class Game():
             print('Please select y or n')
             mode = input(prompt)
         if mode == 'y':
-            self.__init__()
+            self.menu()
         else:
             raise SystemExit
 
