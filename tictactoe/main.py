@@ -52,24 +52,26 @@ class Game():
 class Tictactoe(object):
 
     def __init__(self):
-        self.cells = [' '] * 9
+        self.cells = [' '] * 10
         self.turn = cycle(['X', 'O'])
 
 
     @property
     def view(self):
         view = '\n'.join([
-            f' {self.cells[6]} | {self.cells[7]} | {self.cells[8]} ',
+            f' {self.cells[7]} | {self.cells[8]} | {self.cells[9]} ',
             '---+---+---',
-            f' {self.cells[3]} | {self.cells[4]} | {self.cells[5]} ',
+            f' {self.cells[4]} | {self.cells[5]} | {self.cells[6]} ',
             '---+---+---',
-            f' {self.cells[0]} | {self.cells[1]} | {self.cells[2]} ',
+            f' {self.cells[1]} | {self.cells[2]} | {self.cells[3]} ',
         ])
         return view
 
 
-    def mark(self, cell):
-        self.cells[cell - 1] = next(self.turn)
+    def mark(self, cell:int):
+        if cell not in range(1, 10):
+            raise ValueError(f'expected integer 1-9, got {cell}')
+        self.cells[cell] = next(self.turn)
 
 
 if __name__ == '__main__':
