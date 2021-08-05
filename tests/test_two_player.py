@@ -115,5 +115,19 @@ class TwoPlayerTest(unittest.TestCase):
         self.assertEqual(setup.winner, 'O')
 
 
+    def test_unable_to_mark_filled_cell(self):
+        setup = tictactoe.Tictactoe()
+        setup.mark(5)
+        setup.mark(5)
+        expected = '\n'.join([
+            '   |   |   ',
+            '---+---+---',
+            '   | X |   ',
+            '---+---+---',
+            '   |   |   ',
+        ])
+        self.assertEqual(setup.view, expected)
+
+
 if __name__ == '__main__':
     unittest.main()
