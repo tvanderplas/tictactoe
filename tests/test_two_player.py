@@ -29,5 +29,18 @@ class TwoPlayerTest(unittest.TestCase):
         self.assertEqual(setup.view, expected)
 
 
+    def test_x_in_bottom_right_when_mark_nine(self):
+        setup = tictactoe.Tictactoe()
+        setup.mark(9)
+        expected = '\n'.join([
+            '   |   | X ',
+            '---+---+---',
+            '   |   |   ',
+            '---+---+---',
+            '   |   |   ',
+        ])
+        self.assertEqual(setup.view, expected)
+
+
 if __name__ == '__main__':
     unittest.main()
