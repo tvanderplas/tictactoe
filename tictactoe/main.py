@@ -1,5 +1,6 @@
 
 from itertools import cycle
+from random import choice
 
 class Game():
 
@@ -56,7 +57,24 @@ class Game():
 
 
     def comp_easy(self):
-        self.not_implemented()
+        game = Tictactoe()
+        while not game.is_complete:
+            move = input(f"{game.turn}'s move:")
+            while move not in [str(i) for i in range(1, 10)]:
+                print('Please enter a valid move')
+                move = input(f"{game.turn}'s move:")
+            game.mark(int(move))
+            game.comp_easy_move()
+            print(game.view)
+        print(f'{game.winner} wins!' if game.winner is not None else 'Draw!')
+        again = input('Play again? (y/n):')
+        while again not in ['y', 'n']:
+            print('Please select y or n')
+            again = input('Play again? (y/n):')
+        if again == 'y':
+            self.comp_easy()
+        else:
+            raise SystemExit
 
 
     def not_implemented(self):
@@ -77,7 +95,7 @@ class Game():
 class Tictactoe(object):
 
     def __init__(self):
-        self.cells = [' '] * 10
+        self.cells = [None] + [' '] * 9
         self._turn = cycle(['X', 'O'])
 
 
@@ -135,6 +153,13 @@ class Tictactoe(object):
             raise ValueError(f'expected integer 1-9, got {cell}')
         if not self.is_complete and self.cells[cell] not in ['X', 'O']:
             self.cells[cell] = next(self._turn)
+
+    def comp_easy_move(self):
+        # get empty cells
+        empty_cells = [i for i, c in enumerate(self.cells) if c == ' ']
+        # print(empty_cells)
+        # mark one at random
+        self.mark(choice(empty_cells))
 
 
 if __name__ == '__main__':
